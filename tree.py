@@ -8,22 +8,21 @@ def cal_shannon_ent(dataset):
     num_entries = len(dataset)
 
     labels_counts = {}
-    # 3. 遍历数据集中的每条记录
+    
     for feat_vec in dataset:
-        # feat_vec[-1] 表示每条样本的最后一个元素 类别标签
+        
         current_label = feat_vec[-1]
-        # 如果该标签是第一次出现，则在字典中初始化为 0
+        
         if current_label not in labels_counts.keys():
             labels_counts[current_label] = 0
-        # 累加该标签出现的次数
+        
         labels_counts[current_label] += 1
 
-        #print("类别统计：", labels_counts)
-    # 4. 计算香农熵
+        
     shannon_ent = 0.0
-    # 遍历字典中的每个类别及其计数
+    
     for key in labels_counts:
-        # 计算该类别的概率
+        
         prob = float(labels_counts[key])/num_entries
         # 根据香农熵公式累加：
         shannon_ent -= prob*log(prob, 2)
@@ -32,10 +31,7 @@ def cal_shannon_ent(dataset):
 
 
 def create_dataSet():
-    """
-    熵接近 1，说明“yes”和“no”两个类别的比例比较接近，数据集的不确定性较高。
-    熵接近 0,类别越集中，数据集越“纯”或“确定性越强”
-    """
+    
     dataset = [[1, 1, 'yes'],
                [1.1, 'yes'],
                [1, 0, 'no'],
